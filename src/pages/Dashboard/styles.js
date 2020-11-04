@@ -1,31 +1,16 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center'
+        width: Dimensions.get('screen').width,
+        alignItems: 'center',
     },
-    formContainer: {
-        flexDirection: 'row',
-        height: 80,
-        marginTop: 40,
-        marginBottom: 20,
+    headerContainer: {
         flex: 1,
-        paddingTop: 10,
-        paddingBottom: 10,
-        paddingLeft: 30,
-        paddingRight: 30,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    input: {
-        height: 48,
-        borderRadius: 5,
-        overflow: 'hidden',
-        backgroundColor: 'white',
-        paddingLeft: 16,
-        flex: 1,
-        marginRight: 5
+        width: Dimensions.get('screen').width,
+        alignItems: 'center',
+        marginTop: 20,
     },
     button: {
         height: 47,

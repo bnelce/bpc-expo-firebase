@@ -4,7 +4,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import styles from './styles';
 import subactivities from './subactivities';
 import { Picker } from '@react-native-community/picker';
-import HeaderOcoAdd from '../../components/HeaderOcoAdd';
 //import { firebase } from '../../firebase/config'
 
 export default function OcoAddForm({navigation}) {
@@ -30,7 +29,6 @@ export default function OcoAddForm({navigation}) {
 
     return (
         <View style={styles.container}>
-            <HeaderOcoAdd navigation={navigation}/>
             <KeyboardAwareScrollView
                 style={{ flex: 1, width: '100%' }}
                 keyboardShouldPersistTaps="always">               
@@ -86,23 +84,21 @@ export default function OcoAddForm({navigation}) {
                 </Picker> 
 
                 <TextInput
-                    style={styles.inputTextArea}
+                    style={styles.input}
                     placeholder='Descrição da Ocorrência'
                     placeholderTextColor="#aaaaaa"                    
                     onChangeText={(text) => setHistoric(text)}
                     value={historic}
-                    multiline
-                    numberOfLines={7}
                     underlineColorAndroid="transparent"                    
                 />
                 <TextInput
-                    style={styles.inputTextArea}
+                    style={styles.input}
                     placeholder='Dados Complementares'
                     placeholderTextColor="#aaaaaa"
                     onChangeText={(text) => setComplements(text)}
                     value={complements}
                     multiline
-                    numberOfLines={7}
+                    numberOfLines={5}
                     //underlineColorAndroid="transparent"
                 />
                 <TouchableOpacity

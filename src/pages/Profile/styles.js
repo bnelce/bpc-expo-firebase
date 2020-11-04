@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+export default StyleSheet.create({
     container: {
         flex: 1,
         marginTop: 40,
@@ -27,18 +27,8 @@ const styles = StyleSheet.create({
         marginRight: 30,
         paddingLeft: 16
     },
-    inputTextArea: {
-        borderRadius: 5,
-        overflow: 'hidden',
-        backgroundColor: 'white',
-        marginTop: 10,
-        marginBottom: 10,
-        marginLeft: 30,
-        marginRight: 30,
-        paddingLeft: 16
-    },
     button: {
-        backgroundColor: '#127C16',
+        backgroundColor: '#788eec',
         marginLeft: 30,
         marginRight: 30,
         marginTop: 20,
@@ -62,9 +52,8 @@ const styles = StyleSheet.create({
         color: '#2e2e2d'
     },
     footerLink: {
-        color: "#DB2F24",
+        color: "#788eec",
         fontWeight: "bold",
         fontSize: 16
     }
 })
-export default styles;

@@ -1,103 +1,167 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity ,Button, FlatList } from 'react-native';
-
-import AuthContext from '../../contexts/auth';
+import React, { useState, useEffect } from 'react';
+import { View, Text, FlatList } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import UserAvatar from 'react-native-user-avatar';
+import moment from 'moment';
 
 import styles from './styles';
+import HeaderOcoList from '../../components/HeaderOcoList';
 
-//export default function OcoList(props) {
+const repositories = [
+    {
+      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28b1',
+      activity: 'Combate a Incêndio',
+      subactivity: 'Incêndio em Cozinha',
+      localization: 'Subway',
+      initial_date: moment().format('LLL'),
+    },
+    {
+      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f62',
+      activity: 'Combate a Incêndio',
+      subactivity: 'Incêndio em Cozinha',
+      localization: 'Subway',
+      initial_date: moment().format('LLL'),
+    },
+    {
+      id: '58694a0f-3da1-471f-bd96-145571e29d73',
+      activity: 'Combate a Incêndio',
+      subactivity: 'Incêndio em Cozinha',
+      localization: 'Subway',
+      initial_date: moment().format('LLL'),
+    },
+    {
+      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28bf',
+      activity: 'Combate a Incêndio',
+      subactivity: 'Incêndio em Cozinha',
+      localization: 'Subway',
+      initial_date: moment().format('LLL'),
+    },
+    {
+      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f6d',
+      activity: 'Atendimento Pré-Hospitalar',
+      subactivity: 'Incêndio em Cozinha',
+      localization: 'Subway',
+      initial_date: moment().format('LLL'),
+    },
+    {
+      id: '58694a0f-3da1-471f-bd96-145571e29d7h',
+      activity: 'Outra Atividade',
+      subactivity: 'Incêndio em Cozinha',
+      localization: 'Subway',
+      initial_date: moment().format('LLL'),
+    },
+    {
+      id: '58694a0f-3da1-471f-bd96-145571e29d7j',
+      activity: 'Salvamento',
+      subactivity: 'Incêndio em Cozinha',
+      localization: 'Subway',
+      initial_date: moment().format('LLL'),
+    },
+    {
+      id: '58694a0f-3da1-471f-bd96-145571e29d7k',
+      activity: 'Prevenção',
+      subactivity: 'Incêndio em Cozinha',
+      localization: 'Subway',
+      initial_date: moment().format('LLL'),
+    },
+  
+    {
+      id: '58694a0f-3da1-471f-bd96-145571e29d7v',
+      activity: 'Outra Atividade',
+      subactivity: 'Incêndio em Cozinha',
+      localization: 'Subway',
+      initial_date: moment().format('LLL'),
+    },
+    {
+      id: '58694a0f-3da1-471f-bd96-145571e29d7s',
+      activity: 'Salvamento',
+      subactivity: 'Incêndio em Cozinha',
+      localization: 'Subway',
+      initial_date: moment().format('LLL'),
+    },
+    {
+      id: '58694a0f-3da1-471f-bd96-145571e29d7q',
+      activity: 'Prevenção',
+      subactivity: 'Incêndio em Cozinha',
+      localization: 'Subway',
+      initial_date: moment().format('LLL'),
+    },
+  
+  ];
+
+  function getInitials(name = '') {
+    switch(name) {
+      
+      case 'Combate a Incêndio':
+      return 'CI';
+      break;
+      
+      case 'Atendimento Pré-Hospitalar':
+      return 'APH';
+      break;
+  
+      case 'Salvamento':
+      return 'SA';
+      break;
+  
+      case 'Prevenção':
+      return 'PR';
+      break;
+  
+      default:
+      return name
+      .replace(/\s+/, ' ')
+      .split(' ')
+      .slice(0, 2)
+      .map(v => v && v[0].toUpperCase())
+      .join('');  
+    }
+  };
+
+  
+function ItemIcon(props: { name: string; color: string }) {
+    return <Ionicons size={24} style={{ marginBottom: -3 }} {...props} />;
+  };
+
     export default function OcoList({navigation}) {
+    const [ocurrences, setOcurrences] = useState([])
+
     
-    const { signed, user, signOut } = useContext(AuthContext);
-
-    const [entityText, setEntityText] = useState('')
-    const [entities, setEntities] = useState([])
-
-    //const entityRef = ''; //firebase.firestore().collection('entities');
-    //const userID = props.extraData.id;
-
     useEffect(() => {
-        /*entityRef
-            .where("authorID", "==", userID)
-            .orderBy('createdAt', 'desc')
-            .onSnapshot(
-                querySnapshot => {
-                    const newEntities = []
-                    querySnapshot.forEach(doc => {
-                        const entity = doc.data()
-                        entity.id = doc.id
-                        newEntities.push(entity)
-                    });
-                    setEntities(newEntities)
-                },
-                error => {
-                    console.log(error)
-                }
-            )*/
-    }, [])
+        setOcurrences(repositories);
+    }, []);
 
-    const onAddButtonPress = () => {
-        /*if (entityText && entityText.length > 0) {
-            const timestamp = firebase.firestore.FieldValue.serverTimestamp();
-            const data = {
-                text: entityText,
-                authorID: userID,
-                createdAt: timestamp,
-            };
-            entityRef
-                .add(data)
-                .then(_doc => {
-                    setEntityText('')
-                    Keyboard.dismiss()
-                })
-                .catch((error) => {
-                    alert(error)
-                });
-        }*/
-    }
-
-    const renderEntity = ({item, index}) => {
+    const renderOcurrence = ({item, index}) => {
         return (
-            <View style={styles.entityContainer}>
-                <Text style={styles.entityText}>
-                    {index}. {item.text}
-                </Text>
+            <View style={styles.itemContainer}>
+          <View style={styles.contentContainer}>
+            <View style={styles.avatarContainer}>
+              <UserAvatar size={50} name={getInitials(item.activity)} />
             </View>
+            <View style={styles.textContainer}>
+              <Text style={styles.subactivity} >{item.subactivity}</Text>
+              <Text style={styles.localization} >{item.localization}</Text>
+              <Text style={styles.localization} >{item.initial_date}</Text>
+            </View>
+            <View style={styles.shareIconContainer}>
+              <ItemIcon name="md-share"color="#000000" />
+            </View>
+          </View>
+        </View>
         )
-    }
+    }   
 
-    function handleSignout(){
-        signOut();
-    }
-
-    const onButtonAddPress = () => {
-        navigation.navigate('OcoAddForm')
-    }
-
-
-    return (
-        <View style={styles.container}>
-            <View style={styles.formContainer}>
-                <TextInput
-                    style={styles.input}
-                    placeholder='Lista de Ocorrências'
-                    placeholderTextColor="#aaaaaa"
-                    onChangeText={(text) => setEntityText(text)}
-                    value={entityText}
-                    underlineColorAndroid="transparent"
-                    autoCapitalize="none"
-                />
-                <TouchableOpacity style={styles.button} onPress={onButtonAddPress}>
-                    <Text style={styles.buttonText}>OcoForm</Text>
-                </TouchableOpacity>
-            </View>
-            { entities && (
+    return (       
+      <View style={styles.container}>                      
+            <HeaderOcoList navigation={navigation}/> 
+            { ocurrences && (
                 <View style={styles.listContainer}>
                     <FlatList
-                        data={entities}
-                        renderItem={renderEntity}
+                        data={ocurrences}
+                        renderItem={renderOcurrence}
                         keyExtractor={(item) => item.id}
                         removeClippedSubviews={true}
+                        showsVerticalScrollIndicator={false}
                     />
                 </View>
             )}

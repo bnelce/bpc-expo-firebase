@@ -27,16 +27,6 @@ const styles = StyleSheet.create({
         marginRight: 30,
         paddingLeft: 16
     },
-    inputTextArea: {
-        borderRadius: 5,
-        overflow: 'hidden',
-        backgroundColor: 'white',
-        marginTop: 10,
-        marginBottom: 10,
-        marginLeft: 30,
-        marginRight: 30,
-        paddingLeft: 16
-    },
     button: {
         backgroundColor: '#127C16',
         marginLeft: 30,
