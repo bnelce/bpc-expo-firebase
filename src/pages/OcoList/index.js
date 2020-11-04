@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, Alert, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import UserAvatar from 'react-native-user-avatar';
 import moment from 'moment';
@@ -131,22 +131,29 @@ function ItemIcon(props: { name: string; color: string }) {
         setOcurrences(repositories);
     }, []);
 
+    const onItemPress = () => {
+      navigation.navigate('OcoEditForm');      
+    }
+
+
     const renderOcurrence = ({item, index}) => {
         return (
-            <View style={styles.itemContainer}>
-          <View style={styles.contentContainer}>
-            <View style={styles.avatarContainer}>
-              <UserAvatar size={50} name={getInitials(item.activity)} />
-            </View>
-            <View style={styles.textContainer}>
-              <Text style={styles.subactivity} >{item.subactivity}</Text>
-              <Text style={styles.localization} >{item.localization}</Text>
-              <Text style={styles.localization} >{item.initial_date}</Text>
-            </View>
-            <View style={styles.shareIconContainer}>
-              <ItemIcon name="md-share"color="#000000" />
-            </View>
-          </View>
+          <View style={styles.itemContainer}>
+            <Pressable onPress={onItemPress}>
+              <View style={styles.contentContainer}>
+                <View style={styles.avatarContainer}>
+                  <UserAvatar size={50} name={getInitials(item.activity)} />
+                </View>
+                <View style={styles.textContainer}>
+                  <Text style={styles.subactivity} >{item.subactivity}</Text>
+                  <Text style={styles.localization} >{item.localization}</Text>
+                  <Text style={styles.localization} >{item.initial_date}</Text>
+                </View>
+                <View style={styles.shareIconContainer}>
+                  <ItemIcon name="md-share"color="#000000" />
+                </View>
+              </View>
+            </Pressable>
         </View>
         )
     }   
