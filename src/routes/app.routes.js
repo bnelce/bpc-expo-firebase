@@ -8,6 +8,7 @@ import OcoList from '../pages/OcoList';
 import OcoAddForm from '../pages/OcoAddForm';
 import OcoEditForm from '../pages/OcoEditForm';
 import Profile from '../pages/Profile';
+import Feed from '../pages/Feed';
 
 
 const AppTabs = createBottomTabNavigator();
@@ -18,8 +19,8 @@ const AppRoutes = () => (
     <AppTabs.Screen name="Home" component={Dashboard} options={{ headerTitle: 'Dashboard' }} options={{
           tabBarIcon: ({color}) => <TabBarIcon name="ios-home" color={color}  />,
         }}/>
-    <AppTabs.Screen name="Feed" component={Dashboard} options={{ headerTitle: 'Feed' }} options={{
-          tabBarIcon: ({color}) => <TabBarIcon name="ios-search" color={color}  />,
+    <AppTabs.Screen name="Feed" component={Feed} options={{ headerTitle: 'Feed' }} options={{
+          tabBarIcon: ({color}) => <TabBarIcon name="ios-home" color={color}  />,
         }}/>    
     <AppTabs.Screen 
       name="Ocorrências" 
@@ -51,18 +52,14 @@ function TabTwoNavigator() {
       <TabTwoStack.Screen
         name="OcoList"
         component={OcoList}
-        
-        //options={{ headerTitle: 'Lista de Ocorrências' }}
       />
       <TabTwoStack.Screen
         name="OcoAddForm"
-        component={OcoAddForm}
-        //options={{ headerTitle: 'Adicionar Ocorrência' }}
+        component={OcoAddForm}       
       />
       <TabTwoStack.Screen
         name="OcoEditForm"
-        component={OcoEditForm}
-        //options={{ headerTitle: 'Atualizar Ocorrência' }}
+        component={OcoEditForm}        
       />
     </TabTwoStack.Navigator>
   );

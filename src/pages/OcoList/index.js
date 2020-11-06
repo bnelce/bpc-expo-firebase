@@ -158,7 +158,7 @@ function ItemIcon(props: { name: string; color: string }) {
                 <View style={styles.listContainer}>
                     <FlatList
                         data={ocurrences}
-                        renderItem={renderOcurrence}
+                        renderItem={renderOcurrence}                        
                         keyExtractor={(item) => item.id}
                         removeClippedSubviews={true}
                         showsVerticalScrollIndicator={false}
