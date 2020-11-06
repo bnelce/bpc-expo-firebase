@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View} from 'react-native';
+import {horizontalPaddingBase} from '../constants/layout';
 
 export default ({children, style}) => (
     <View style={{...styles.box, ...style}}>
@@ -9,6 +10,7 @@ export default ({children, style}) => (
 
 const styles = StyleSheet.create({
     box: {
-        paddingHorizontal: 20,
+
+        paddingHorizontal: horizontalPaddingBase,
     },
 });
