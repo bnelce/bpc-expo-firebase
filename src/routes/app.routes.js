@@ -19,20 +19,23 @@ const AppRoutes = () => (
     <AppTabs.Screen name="Home" component={Dashboard} options={{ headerTitle: 'Dashboard' }} options={{
           tabBarIcon: ({color}) => <TabBarIcon name="ios-home" color={color}  />,
         }}/>
-    <AppTabs.Screen name="Feed" component={Feed} options={{ headerTitle: 'Feed' }} options={{
+    {/*<AppTabs.Screen name="Feed" component={Feed} options={{ headerTitle: 'Feed' }} options={{
           tabBarIcon: ({color}) => <TabBarIcon name="ios-home" color={color}  />,
-        }}/>    
+        }}/>    */}
     <AppTabs.Screen 
       name="Ocorrências" 
       component={TabTwoNavigator}       
       options={{
           tabBarIcon: ({color}) => <TabBarIcon name="ios-flame" color={color}  />,
         }}/>
-    <AppTabs.Screen name="Notificações" component={Profile} options={{
+    {/*<AppTabs.Screen name="Notificações" component={Profile} options={{
           tabBarIcon: ({color}) => <TabBarIcon name="ios-notifications" color={color}  />,
-        }}/>
+        }}/>*/}
     <AppTabs.Screen name="Perfil" component={Profile} options={{
           tabBarIcon: ({color}) => <TabBarIcon name="ios-person" color={color}  />,
+        }}/>
+    <AppTabs.Screen name="Sobre" component={Profile} options={{
+          tabBarIcon: ({color}) => <TabBarIcon name="ios-alert" color={color}  />,
         }}/>
   </AppTabs.Navigator>
 )
