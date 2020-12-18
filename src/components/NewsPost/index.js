@@ -1,5 +1,6 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Linking} from 'react-native';
+import { RectButton } from "react-native-gesture-handler";
 import moment from 'moment';
 import 'moment/locale/pt-br';
 import PostSubtitle from './PostSubtitle';
@@ -8,6 +9,12 @@ import PostImage from './PostImage';
 import Box from '../Box';
 
 export default ({post}) => {
+
+    function handleSendSite() {
+        Linking.openURL(
+          `${post.url}`
+        );
+      }
     return (
         <View>
             <PostHeader post={post}/>
@@ -15,7 +22,9 @@ export default ({post}) => {
             <PostSubtitle post={post}/>
             <Box style={styles.infoContainer}>
                 <Text style={styles.info}>{ moment().startOf(post.publishedAt).fromNow() }</Text>
-                <Text style={styles.info}>Ler notícia</Text>
+                <RectButton style={styles.button} onPress={handleSendSite}>
+                    <Text style={styles.buttonText}>Ler notícia</Text>
+                </RectButton>
             </Box>
         </View>
     );
