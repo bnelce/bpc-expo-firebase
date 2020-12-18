@@ -37,7 +37,7 @@ export default function News(props) {
   
   async function asyncNews() {
     try {
-      const response = await axios.get("https://newsapi.org/v2/everything?q=bombeiro&from=2020-12-17&to=2020-12-17&sortBy=popularity&apiKey=08351aec0e4c4300bd620889ffa6c915");
+      const response = await axios.get("https://newsapi.org/v2/everything?q=bombeiro+civil&from=2020-12-17&to=2020-12-17&sortBy=popularity&apiKey=08351aec0e4c4300bd620889ffa6c915");
       setNews(response.data.articles)
       console.log(news);
     } catch (error) {
