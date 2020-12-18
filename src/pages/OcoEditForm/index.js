@@ -4,6 +4,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import styles from './styles';
 import subactivities from './subactivities';
 import { Picker } from '@react-native-community/picker';
+import HeaderOcoEdit from '../../components/HeaderOcoEdit';
 //import { firebase } from '../../firebase/config'
 
 export default function OcoAddForm({navigation}) {
@@ -29,6 +30,7 @@ export default function OcoAddForm({navigation}) {
 
     return (
         <View style={styles.container}>
+            <HeaderOcoEdit navigation={navigation} />
             <KeyboardAwareScrollView
                 style={{ flex: 1, width: '100%' }}
                 keyboardShouldPersistTaps="always">               
