@@ -65,6 +65,15 @@ const styles = StyleSheet.create({
         color: "#DB2F24",
         fontWeight: "bold",
         fontSize: 16
+    },
+    buttonContainer: {
+      flexDirection: "row"
+    },
+    buttonText: {
+      marginLeft: 10,
+      fontSize: 18,
+      color: '#fff',
+      fontWeight: 'bold',
     }
 })
 export default styles;

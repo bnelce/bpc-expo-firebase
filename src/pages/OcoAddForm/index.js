@@ -3,6 +3,7 @@ import { Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
 import subactivities from './subactivities';
+import { Feather as Icon } from '@expo/vector-icons';
 import { Picker } from '@react-native-community/picker';
 import HeaderOcoAdd from '../../components/HeaderOcoAdd';
 //import { firebase } from '../../firebase/config'
@@ -105,10 +106,11 @@ export default function OcoAddForm({navigation}) {
                     numberOfLines={7}
                     //underlineColorAndroid="transparent"
                 />
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => onAddButtonPress()}>
-                    <Text style={styles.buttonTitle}>Salvar</Text>
+                <TouchableOpacity style={styles.button} onPress={() => onAddButtonPress()}> 
+                    <View style={styles.buttonContainer}>
+                        <Icon name="save" size={22} color="white" />
+                        <Text style={styles.buttonText}>Salvar</Text> 
+                    </View>
                 </TouchableOpacity>
                 <View style={styles.footerView}>
                     <Text style={styles.footerText}> </Text>
