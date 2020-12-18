@@ -132,6 +132,11 @@ function ItemIcon(props: { name: string; color: string }) {
         setOcurrences(repositories);
     }, []);
 
+    const onItemPress = () => {
+      navigation.navigate('OcoEditForm');      
+    }
+
+
     const renderOcurrence = ({item, index}) => {
 
       function handleDeletePress(){ 
