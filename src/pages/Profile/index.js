@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Feather as Icon } from '@expo/vector-icons';
 import styles from './styles';
 import {Picker} from '@react-native-community/picker';
 //import { firebase } from '../../firebase/config'
@@ -135,11 +136,12 @@ export default function Profile({navigation}) {
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
                 />
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => onRegisterPress()}>
-                    <Text style={styles.buttonTitle}>Atualizar</Text>
-                </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={() => onRegisterPress()}> 
+                    <View style={styles.buttonContainer}>
+                        <Icon name="save" size={22} color="white" />
+                        <Text style={styles.buttonText}>Salvar</Text> 
+                    </View>
+                </TouchableOpacity> 
                 <View style={styles.footerView}>
                     <Text style={styles.footerText}> </Text>
                 </View>
