@@ -1,94 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity, Alert  } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import moment from 'moment';
+import 'moment/locale/pt-br';
 import { Feather as Icon } from '@expo/vector-icons';
 import UserAvatar from 'react-native-user-avatar';
-import moment from 'moment';
+import Database from '../../services/Database';
+
 
 import styles from './styles';
 import HeaderOcoList from '../../components/HeaderOcoList';
-
-const repositories = [
-    {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28b1',
-      activity: 'Combate a Incêndio',
-      subactivity: 'Incêndio em Cozinha',
-      localization: 'Subway',
-      initial_date: moment().format('LLL'),
-    },
-    {
-      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f62',
-      activity: 'Combate a Incêndio',
-      subactivity: 'Incêndio em Cozinha',
-      localization: 'Subway',
-      initial_date: moment().format('LLL'),
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d73',
-      activity: 'Combate a Incêndio',
-      subactivity: 'Incêndio em Cozinha',
-      localization: 'Subway',
-      initial_date: moment().format('LLL'),
-    },
-    {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28bf',
-      activity: 'Combate a Incêndio',
-      subactivity: 'Incêndio em Cozinha',
-      localization: 'Subway',
-      initial_date: moment().format('LLL'),
-    },
-    {
-      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f6d',
-      activity: 'Atendimento Pré-Hospitalar',
-      subactivity: 'Incêndio em Cozinha',
-      localization: 'Subway',
-      initial_date: moment().format('LLL'),
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d7h',
-      activity: 'Outra Atividade',
-      subactivity: 'Incêndio em Cozinha',
-      localization: 'Subway',
-      initial_date: moment().format('LLL'),
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d7j',
-      activity: 'Salvamento',
-      subactivity: 'Incêndio em Cozinha',
-      localization: 'Subway',
-      initial_date: moment().format('LLL'),
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d7k',
-      activity: 'Prevenção',
-      subactivity: 'Incêndio em Cozinha',
-      localization: 'Subway',
-      initial_date: moment().format('LLL'),
-    },
-  
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d7v',
-      activity: 'Outra Atividade',
-      subactivity: 'Incêndio em Cozinha',
-      localization: 'Subway',
-      initial_date: moment().format('LLL'),
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d7s',
-      activity: 'Salvamento',
-      subactivity: 'Incêndio em Cozinha',
-      localization: 'Subway',
-      initial_date: moment().format('LLL'),
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d7q',
-      activity: 'Prevenção',
-      subactivity: 'Incêndio em Cozinha',
-      localization: 'Subway',
-      initial_date: moment().format('LLL'),
-    },
-  
-  ];
 
   function getInitials(name = '') {
     switch(name) {
@@ -118,27 +38,16 @@ const repositories = [
       .join('');  
     }
   };
-
   
-function ItemIcon(props: { name: string; color: string }) {
-    return <Ionicons size={24} style={{ marginBottom: -3 }} {...props} />;
-  };
-
-    export default function OcoList({navigation}) {
+    export default function OcoList({route, navigation}) {
     const [ocurrences, setOcurrences] = useState([])
 
     
     useEffect(() => {
-        setOcurrences(repositories);
-    }, []);
-
-    const onItemPress = () => {
-      navigation.navigate('OcoEditForm');      
-    }
-
+      Database.getItems().then(items => setOcurrences(items));
+  }, [route]); 
 
     const renderOcurrence = ({item, index}) => {
-
       function handleDeletePress(){ 
         Alert.alert(
             "Atenção",
@@ -150,8 +59,8 @@ function ItemIcon(props: { name: string; color: string }) {
                 style: "cancel"
                 },
                 { text: "Sim", onPress: () => {
-                    //    Database.deleteItem(props.id)
-                      //      .then(response => props.navigation.navigate("AppList", {id: props.id}));
+                    Database.deleteItem(item.id)
+                    .then(response => navigation.navigate("OcoList", {id: item.id}));
                     }
                 }
             ],
@@ -160,8 +69,8 @@ function ItemIcon(props: { name: string; color: string }) {
     } 
 
     async function handleEditPress(){ 
-        //const item = await Database.getItem(props.id);
-        //props.navigation.navigate("AppForm", item);
+        const itemEdit = await Database.getItem(item.id);
+        navigation.navigate("OcoAddForm", itemEdit);
     }
 
         return (
@@ -173,7 +82,7 @@ function ItemIcon(props: { name: string; color: string }) {
             <View style={styles.textContainer}>
               <Text style={styles.subactivity} >{item.subactivity}</Text>
               <Text style={styles.localization} >{item.localization}</Text>
-              <Text style={styles.localization} >{item.initial_date}</Text>
+              <Text style={styles.localization} >{item.initialDate}</Text>
             </View>
             
               <View style={styles.buttonsContainer}>

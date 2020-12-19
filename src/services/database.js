@@ -1,7 +1,8 @@
-import AsyncStorage from '@react-native-community/async-storage';
+//import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function getItems(){
-    return AsyncStorage.getItem('items')
+    return AsyncStorage.getItem('@ocos')
             .then(response => {
                 if(response)
                     return Promise.resolve(JSON.parse(response));
@@ -26,14 +27,14 @@ async function saveItem(listItem, id){
     else
       savedItems.push(listItem);
 
-    return AsyncStorage.setItem('items', JSON.stringify(savedItems));
+    return AsyncStorage.setItem('@ocos', JSON.stringify(savedItems));
 }
 
 async function deleteItem(id){
     let savedItems = await getItems();
     const index = await savedItems.findIndex(item => item.id === id);
     savedItems.splice(index, 1);
-    return AsyncStorage.setItem('items', JSON.stringify(savedItems));
+    return AsyncStorage.setItem('@ocos', JSON.stringify(savedItems));
 }
 
 module.exports = {
