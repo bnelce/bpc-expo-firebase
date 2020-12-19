@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Text, TextInput, TouchableOpacity, View, Button } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import styles from './styles';
 import subactivities from './subactivities';
 import { Feather as Icon } from '@expo/vector-icons';
@@ -18,13 +19,13 @@ export default function OcoAddForm({route, navigation}) {
     const [activity, setActivity] = useState('');
     const [subactivity, setSubactivity] = useState('');
     const [subactivitiesArray, setSubactivitiesArray] = useState('');
-    const [initialDate, setInitialDate] = useState('');
-    const [finalDate, setFinalDate] = useState('');
+    const [initialDate, setInitialDate] = useState(new Date(1598051730000));
+    const [finalDate, setFinalDate] = useState(new Date(1598051730000));
     const [historic, setHistoric] = useState('');
     const [complements, setComplements] = useState('');
-    
+
     useEffect(() => {
-        if(!route.params) return;
+        if(!route.params) return;   
         setRequester(route.params.requester);
         setRequesterPhone(route.params.requesterPhone);
         setLocalization(route.params.localization);
@@ -80,6 +81,15 @@ export default function OcoAddForm({route, navigation}) {
                     value={requesterPhone}
                     underlineColorAndroid="transparent"                    
                 />
+                <TextInput
+                    style={styles.input}
+                    placeholder='Início do atendimento'
+                    placeholderTextColor="#aaaaaa"
+                    onChangeText={(text) => setRequesterPhone(text)}
+                    keyboardType="phone-pad"
+                    value={requesterPhone}
+                    underlineColorAndroid="transparent"                    
+                />       
                 <TextInput
                     style={styles.input}
                     placeholder='Localização'

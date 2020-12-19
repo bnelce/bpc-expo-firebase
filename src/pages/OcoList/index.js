@@ -82,7 +82,7 @@ import HeaderOcoList from '../../components/HeaderOcoList';
             <View style={styles.textContainer}>
               <Text style={styles.subactivity} >{item.subactivity}</Text>
               <Text style={styles.localization} >{item.localization}</Text>
-              <Text style={styles.localization} >{item.initial_date}</Text>
+              <Text style={styles.localization} >{item.initialDate}</Text>
             </View>
             
               <View style={styles.buttonsContainer}>
