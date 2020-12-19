@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Text, TextInput, TouchableOpacity, View, Button } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import styles from './styles';
 import subactivities from './subactivities';
 import { Feather as Icon } from '@expo/vector-icons';
 import { Picker } from '@react-native-community/picker';
 import HeaderOcoAdd from '../../components/HeaderOcoAdd';
-//import { firebase } from '../../firebase/config'
+import HeaderOcoEdit from '../../components/HeaderOcoEdit';
+import Database from '../../services/Database';
 
-export default function OcoAddForm({navigation}) {
+export default function OcoAddForm({route, navigation}) {
+    const id = route.params ? route.params.id : undefined;
     const [requester, setRequester] = useState('');
     const [requesterPhone, setRequesterPhone] = useState('');
     const [localization, setLocalization] = useState('');
@@ -16,22 +19,48 @@ export default function OcoAddForm({navigation}) {
     const [activity, setActivity] = useState('');
     const [subactivity, setSubactivity] = useState('');
     const [subactivitiesArray, setSubactivitiesArray] = useState('');
-    const [initialDate, setInitialDate] = useState('');
-    const [finalDate, setFinalDate] = useState('');
+    const [initialDate, setInitialDate] = useState(new Date(1598051730000));
+    const [finalDate, setFinalDate] = useState(new Date(1598051730000));
     const [historic, setHistoric] = useState('');
     const [complements, setComplements] = useState('');
-    
+
     useEffect(() => {
-        setSubactivitiesArray(subactivities);
-        console.log(subactivities);
-      });
+        if(!route.params) return;   
+        setRequester(route.params.requester);
+        setRequesterPhone(route.params.requesterPhone);
+        setLocalization(route.params.localization);
+        setServiceStation(route.params.serviceStation);
+        setActivity(route.params.activity);
+        setSubactivity(route.params.subactivity);
+        setInitialDate(route.params.initialDate);
+        setFinalDate(route.params.finalDate);
+        setHistoric(route.params.historic);
+        setComplements(route.params.complements);
+      }, [route]);
 
     const onAddButtonPress = () => {
+        const listItem = {
+            requester,
+            requesterPhone,
+            localization,
+            serviceStation,
+            activity,
+            subactivity,
+            initialDate,
+            finalDate,
+            historic,
+            complements
+        };
+        console.log('listitem', listItem);
+        Database.saveItem(listItem, id)
+        .then(response => navigation.navigate("OcoList", listItem));
     }
 
     return (
         <View style={styles.container}>
-            <HeaderOcoAdd navigation={navigation}/>
+            { id ?
+            <HeaderOcoEdit navigation={navigation}/> : 
+            <HeaderOcoAdd navigation={navigation}/>}
             <KeyboardAwareScrollView
                 style={{ flex: 1, width: '100%' }}
                 keyboardShouldPersistTaps="always">               
@@ -48,9 +77,19 @@ export default function OcoAddForm({navigation}) {
                     placeholder='Telefone do Solicitante'
                     placeholderTextColor="#aaaaaa"
                     onChangeText={(text) => setRequesterPhone(text)}
+                    keyboardType="phone-pad"
                     value={requesterPhone}
                     underlineColorAndroid="transparent"                    
                 />
+                <TextInput
+                    style={styles.input}
+                    placeholder='Início do atendimento'
+                    placeholderTextColor="#aaaaaa"
+                    onChangeText={(text) => setRequesterPhone(text)}
+                    keyboardType="phone-pad"
+                    value={requesterPhone}
+                    underlineColorAndroid="transparent"                    
+                />       
                 <TextInput
                     style={styles.input}
                     placeholder='Localização'
