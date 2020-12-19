@@ -6,9 +6,11 @@ import subactivities from './subactivities';
 import { Feather as Icon } from '@expo/vector-icons';
 import { Picker } from '@react-native-community/picker';
 import HeaderOcoAdd from '../../components/HeaderOcoAdd';
-//import { firebase } from '../../firebase/config'
+import HeaderOcoEdit from '../../components/HeaderOcoEdit';
+import Database from '../../services/Database';
 
-export default function OcoAddForm({navigation}) {
+export default function OcoAddForm({route, navigation}) {
+    const id = route.params ? route.params.id : undefined;
     const [requester, setRequester] = useState('');
     const [requesterPhone, setRequesterPhone] = useState('');
     const [localization, setLocalization] = useState('');
@@ -22,16 +24,42 @@ export default function OcoAddForm({navigation}) {
     const [complements, setComplements] = useState('');
     
     useEffect(() => {
-        setSubactivitiesArray(subactivities);
-        console.log(subactivities);
-      });
+        if(!route.params) return;
+        setRequester(route.params.requester);
+        setRequesterPhone(route.params.requesterPhone);
+        setLocalization(route.params.localization);
+        setServiceStation(route.params.serviceStation);
+        setActivity(route.params.activity);
+        setSubactivity(route.params.subactivity);
+        setInitialDate(route.params.initialDate);
+        setFinalDate(route.params.finalDate);
+        setHistoric(route.params.historic);
+        setComplements(route.params.complements);
+      }, [route]);
 
     const onAddButtonPress = () => {
+        const listItem = {
+            requester,
+            requesterPhone,
+            localization,
+            serviceStation,
+            activity,
+            subactivity,
+            initialDate,
+            finalDate,
+            historic,
+            complements
+        };
+        console.log('listitem', listItem);
+        Database.saveItem(listItem, id)
+        .then(response => navigation.navigate("OcoList", listItem));
     }
 
     return (
         <View style={styles.container}>
-            <HeaderOcoAdd navigation={navigation}/>
+            { id ?
+            <HeaderOcoEdit navigation={navigation}/> : 
+            <HeaderOcoAdd navigation={navigation}/>}
             <KeyboardAwareScrollView
                 style={{ flex: 1, width: '100%' }}
                 keyboardShouldPersistTaps="always">               
