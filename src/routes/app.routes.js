@@ -12,8 +12,8 @@ const AppTabs = createBottomTabNavigator();
 
 const AppRoutes = () => (
   <AppTabs.Navigator>
-    <AppTabs.Screen name="Home" component={News} options={{ headerTitle: 'Notícias' }} options={{
-          tabBarIcon: ({color}) => <TabBarIcon name="ios-home" color={color}  />,
+    <AppTabs.Screen name="Notícias" component={News} options={{ headerTitle: 'Notícias' }} options={{
+          tabBarIcon: ({color}) => <TabBarIcon name="ios-paper" color={color}  />,
         }}/>
     {/*<AppTabs.Screen name="Feed" component={Feed} options={{ headerTitle: 'Feed' }} options={{
           tabBarIcon: ({color}) => <TabBarIcon name="ios-home" color={color}  />,

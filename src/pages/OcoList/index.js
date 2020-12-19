@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity, Alert  } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import moment from 'moment';
+import 'moment/locale/pt-br';
 import { Feather as Icon } from '@expo/vector-icons';
 import UserAvatar from 'react-native-user-avatar';
 import Database from '../../services/Database';
-import moment from 'moment';
+
 
 import styles from './styles';
 import HeaderOcoList from '../../components/HeaderOcoList';

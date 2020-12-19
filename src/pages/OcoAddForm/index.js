@@ -76,6 +76,7 @@ export default function OcoAddForm({route, navigation}) {
                     placeholder='Telefone do Solicitante'
                     placeholderTextColor="#aaaaaa"
                     onChangeText={(text) => setRequesterPhone(text)}
+                    keyboardType="phone-pad"
                     value={requesterPhone}
                     underlineColorAndroid="transparent"                    
                 />
