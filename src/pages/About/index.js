@@ -19,7 +19,7 @@ export default function About() {
 
   function handleSendGitHub() {
     Linking.openURL(
-      'https://github.com/bnelce',
+      'http://abneroliveira.eti.br',
     );
   }
 
